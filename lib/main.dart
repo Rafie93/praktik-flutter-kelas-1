@@ -43,7 +43,9 @@ class MainApp extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProductPage(),
+                          builder: (context) => ProductPage(
+                            title: 'Product List',
+                          ),
                         ),
                       );
                     },
@@ -101,7 +103,25 @@ class MainApp extends StatelessWidget {
                   Container(
                     height: 100,
                     width: 100,
-                    color: Colors.yellow,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                            width: 500,
+                            height: 50,
+                            image: AssetImage("assets/images/diet.png")),
+                        Text("Diet",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
                   ),
                 ],
               ),
