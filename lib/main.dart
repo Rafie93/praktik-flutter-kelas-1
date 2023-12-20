@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1a/DaftarMotor.dart';
 import 'package:flutter_application_1a/FoodListScreen.dart';
+import 'package:flutter_application_1a/HistoryScreen.dart';
 import 'package:flutter_application_1a/model/RegisterResponse.dart';
 
 void main() {
@@ -23,16 +24,19 @@ class MainApp extends StatelessWidget {
             child: ListView(
               children: [
                 UserAccountsDrawerHeader(
-                    accountName: Text("Kelompok 1"),
-                    accountEmail: Text("aaaa@gmail.com")),
+                    decoration: BoxDecoration(color: Colors.green),
+                    accountName: Text("Rafie"),
+                    accountEmail: Text("raf@gmail.com")),
                 ListTile(
-                  leading: Icon(Icons.home),
                   title: Text('Home'),
-                  onTap: () {},
+                  leading: Icon(Icons.home),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text('Daftar Makanan'),
+                  title: Text('Makanan'),
+                  leading: Icon(Icons.food_bank),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -40,20 +44,23 @@ class MainApp extends StatelessWidget {
                             builder: (context) => FoodListScreen()));
                   },
                 ),
+                ListTile(
+                  title: Text('History'),
+                  leading: Icon(Icons.history),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HistoryScreen()));
+                  },
+                ),
               ],
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: 'Profile'),
-            ],
-          ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
-            backgroundColor: Colors.green,
-            child: Icon(Icons.add, color: Colors.black),
+            backgroundColor: Colors.red,
+            child: Icon(Icons.refresh),
           ),
           appBar: AppBar(
             title: Text('Whatshapp Clone'),
@@ -71,6 +78,18 @@ class MainApp extends StatelessWidget {
               ),
             ],
           ),
+          bottomNavigationBar: BottomNavigationBar(
+              currentIndex: 0,
+              onTap: (int index) {
+                print(index);
+              },
+              selectedItemColor: Colors.red,
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Order'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.account_box), label: 'Account'),
+              ]),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
