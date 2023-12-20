@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1a/DaftarMotor.dart';
+import 'package:flutter_application_1a/FoodListScreen.dart';
+import 'package:flutter_application_1a/model/RegisterResponse.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -17,6 +19,42 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                UserAccountsDrawerHeader(
+                    accountName: Text("Kelompok 1"),
+                    accountEmail: Text("aaaa@gmail.com")),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('Daftar Makanan'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodListScreen()));
+                  },
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: 'Profile'),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.green,
+            child: Icon(Icons.add, color: Colors.black),
+          ),
           appBar: AppBar(
             title: Text('Whatshapp Clone'),
             backgroundColor: Colors.blue,
@@ -218,7 +256,12 @@ class MainApp extends StatelessWidget {
                         height: 50,
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            RegisterResponse.connectToAPI('Rafie', 'Programmer')
+                                .then((value) {
+                              print(value);
+                            });
+                          },
                           child: Text('Submit'),
                         ),
                       )
