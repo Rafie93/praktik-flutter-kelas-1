@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1a/DaftarMotor.dart';
 import 'package:flutter_application_1a/FoodListScreen.dart';
 import 'package:flutter_application_1a/HistoryScreen.dart';
+import 'package:flutter_application_1a/RegisterScreen.dart';
+import 'package:flutter_application_1a/UserScreen.dart';
 import 'package:flutter_application_1a/model/RegisterResponse.dart';
 
 void main() {
@@ -27,6 +29,24 @@ class MainApp extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.green),
                     accountName: Text("Rafie"),
                     accountEmail: Text("raf@gmail.com")),
+                ListTile(
+                  title: Text('Register'),
+                  leading: Icon(Icons.app_registration),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text('List User'),
+                  leading: Icon(Icons.app_registration),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserScreen()));
+                  },
+                ),
                 ListTile(
                   title: Text('Home'),
                   leading: Icon(Icons.home),
@@ -240,53 +260,6 @@ class MainApp extends StatelessWidget {
 
                 /// END SLIDER
                 SizedBox(height: 10),
-
-                Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter your name',
-                          labelText: 'Name',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter your email',
-                          labelText: 'Email',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          labelText: 'Password',
-                          border: OutlineInputBorder(),
-                        ),
-                        obscureText: true,
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            RegisterResponse.connectToAPI('Rafie', 'Programmer')
-                                .then((value) {
-                              print(value);
-                            });
-                          },
-                          child: Text('Submit'),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
               ],
             ),
           )),
