@@ -11,10 +11,10 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   UserResponse? userResponse = null;
   List<UserResponse> userList = [];
-  
+
   @override
   void initState() {
-    print("init state")
+    print("init state");
     UserResponse.getUsersList("1").then((value) {
       userList = value;
       setState(() {});
