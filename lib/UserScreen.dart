@@ -14,7 +14,6 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void initState() {
-    print("init state");
     UserResponse.getUsersList("1").then((value) {
       userList = value;
       setState(() {});
