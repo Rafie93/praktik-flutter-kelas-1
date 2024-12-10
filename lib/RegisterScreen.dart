@@ -49,9 +49,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                    ),
                     onPressed: () {
                       RegisterResponse.connectToAPI(
                               nameController.text, jobController.text)

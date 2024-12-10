@@ -120,8 +120,8 @@ class MainApp extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: 100,
-                        width: 100,
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.red[400],
@@ -153,8 +153,8 @@ class MainApp extends StatelessWidget {
                                 builder: (context) => DaftarMotor()));
                       },
                       child: Container(
-                        height: 100,
-                        width: 100,
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.green[300],
@@ -167,7 +167,7 @@ class MainApp extends StatelessWidget {
                                   height: 50,
                                   width: 50,
                                   image: NetworkImage(
-                                      "https://cdn.icon-icons.com/icons2/577/PNG/256/TouringMotorcycle_Green_icon-icons.com_54907.png")),
+                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOg6oKIOxVAqdwvCGEHRLzUSERajwCRf2L-w&s")),
                               Text(
                                 'Motor',
                                 style: TextStyle(
@@ -180,8 +180,33 @@ class MainApp extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: 100,
-                        width: 100,
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue[300],
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image(
+                                  height: 50,
+                                  width: 50,
+                                  image: AssetImage("assets/images/diet.png")),
+                              Text(
+                                'Makanan',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.blue[300],
