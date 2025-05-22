@@ -1,12 +1,30 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1a/DaftarMotor.dart';
 import 'package:flutter_application_1a/FoodListScreen.dart';
+import 'package:flutter_application_1a/HistoryPage.dart';
 import 'package:flutter_application_1a/HistoryScreen.dart';
+import 'package:flutter_application_1a/ImageUploadScreen.dart';
+import 'package:flutter_application_1a/MinumanPage.dart';
 import 'package:flutter_application_1a/RegisterScreen.dart';
 import 'package:flutter_application_1a/UserScreen.dart';
 import 'package:flutter_application_1a/model/RegisterResponse.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+  final fbapiKey = dotenv.env['FIREBASE_API_KEY'];
+  final fbappid = dotenv.env['FIREBASE_APP_ID'];
+  final fbsender = dotenv.env['FIREBASE_SENDER_ID'];
+  final fbproject = dotenv.env['FIREBASE_PROJECT_ID'];
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: fbapiKey!,
+          appId: fbappid!,
+          messagingSenderId: fbsender!,
+          projectId: fbproject!));
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Whatshapp Clone',
@@ -29,6 +47,14 @@ class MainApp extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.green),
                     accountName: Text("Rafie"),
                     accountEmail: Text("raf@gmail.com")),
+                ListTile(
+                  title: Text('Minum'),
+                  leading: Icon(Icons.food_bank_sharp),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Historypage()));
+                  },
+                ),
                 ListTile(
                   title: Text('Register'),
                   leading: Icon(Icons.app_registration),
@@ -117,30 +143,38 @@ class MainApp extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red[400],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.shopping_basket,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Produk',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ImageUploadScreen()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.red[400],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.shopping_basket,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                'Produk',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

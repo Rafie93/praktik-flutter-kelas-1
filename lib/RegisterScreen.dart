@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1a/model/DaftarResponse.dart';
+import 'package:flutter_application_1a/model/JobUserResponse.dart';
 import 'package:flutter_application_1a/model/RegisterResponse.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -8,8 +12,10 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
+final db = FirebaseFirestore.instance;
+
 class _RegisterScreenState extends State<RegisterScreen> {
-  RegisterResponse? registerResponse = null;
+  JobUserResponse? jobUserResponse;
   TextEditingController nameController = TextEditingController();
   TextEditingController jobController = TextEditingController();
 
@@ -50,26 +56,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      RegisterResponse.connectToAPI(
-                              nameController.text, jobController.text)
-                          .then((value) {
-                        registerResponse = value;
-                        setState(() {});
+                      if (nameController.text == "" ||
+                          jobController.text == "") {
+                        Fluttertoast.showToast(
+                            msg: "Name and Job cannot be empty",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 10,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                        return;
+                      }
+                      db.collection('register').add({
+                        'nama': nameController.text,
+                        'job': jobController.text
                       });
+                      // JobUserResponse.kirimDataJobUser(
+                      //         nameController.text, jobController.text)
+                      //     .then((value) {
+                      //   setState(() {
+                      //     jobUserResponse = value;
+                      //     Fluttertoast.showToast(
+                      //         msg:
+                      //             "Data berhasil disimpan atas nama ${jobUserResponse!.nama} dengan pekerjaan ${jobUserResponse!.pekerjaan} dan id ${jobUserResponse!.id} pada tanggal ${jobUserResponse!.tanggal}",
+                      //         toastLength: Toast.LENGTH_SHORT,
+                      //         gravity: ToastGravity.CENTER,
+                      //         timeInSecForIosWeb: 10,
+                      //         backgroundColor: Colors.red,
+                      //         textColor: Colors.white,
+                      //         fontSize: 16.0);
+                      //   });
+                      // });
                     },
                     child: Text('Submit'),
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(registerResponse == null
-                    ? 'No Data'
-                    : registerResponse!.id +
-                        ' | ' +
-                        registerResponse!.name +
-                        ' | ' +
-                        registerResponse!.job +
-                        ' | ' +
-                        registerResponse!.createdAt)
               ],
             ),
           ),

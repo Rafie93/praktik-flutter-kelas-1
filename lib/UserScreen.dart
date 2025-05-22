@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1a/model/ListUserResponse.dart';
 import 'package:flutter_application_1a/model/UserResponse.dart';
 
 class UserScreen extends StatefulWidget {
@@ -9,12 +10,12 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  UserResponse? userResponse = null;
-  List<UserResponse> userList = [];
+  ListuserResponse? listuserResponse;
+  List<ListuserResponse> userList = [];
 
   @override
   void initState() {
-    UserResponse.getUsersList("1").then((value) {
+    ListuserResponse.getData("2").then((value) {
       userList = value;
       setState(() {});
     });
@@ -27,30 +28,32 @@ class _UserScreenState extends State<UserScreen> {
       appBar: AppBar(
         title: Text('Daftar User'),
       ),
-      body: ListView.builder(
-          itemCount: userList.length,
-          itemBuilder: (context, index) {
-            return InkWell(
-              child: Card(
-                child: Row(children: [
-                  Image(
-                      width: 100,
-                      height: 100,
-                      image: NetworkImage(userList[index].avatar)),
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(userList[index].name),
-                        Text(userList[index].email),
-                      ],
-                    ),
-                  )
-                ]),
-              ),
-            );
-          }),
+      body: Container(
+        child: ListView.builder(
+            itemCount: userList.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                child: Card(
+                  child: Row(children: [
+                    Image(
+                        width: 100,
+                        height: 100,
+                        image: NetworkImage(userList[index].avatar)),
+                    Container(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(userList[index].firstName),
+                          Text(userList[index].email),
+                        ],
+                      ),
+                    )
+                  ]),
+                ),
+              );
+            }),
+      ),
     );
   }
 }
